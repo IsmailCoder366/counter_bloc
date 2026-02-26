@@ -27,18 +27,24 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              BlocBuilder<CounterBloc, CounterState>(
-                builder: (context, state){
-                  return   Text(
-                  state.counter.toString(),
-                  style: TextStyle(
-                  fontSize: 60,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  ),
-                  );
-                },
-
+              BlocConsumer<CounterBloc, CounterState>(
+          listener: (context, state) {
+            if (state.counter == 5) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Reached at 5')),
+              );
+            }
+          },
+          builder: (context, state) {
+            return Text(
+              state.counter.toString(),
+              style: TextStyle(
+                fontSize: 60,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            );
+          },
               ),
               const SizedBox(height: 20),
 
