@@ -1,4 +1,9 @@
+import 'package:bloc_counter/bloc/counter_event.dart';
+import 'package:bloc_counter/bloc/counter_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/counter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,13 +27,18 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                '0',
-                style: TextStyle(
+              BlocBuilder<CounterBloc, CounterState>(
+                builder: (context, state){
+                  return   Text(
+                  state.counter.toString(),
+                  style: TextStyle(
                   fontSize: 60,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                ),
+                  ),
+                  );
+                },
+
               ),
               const SizedBox(height: 20),
 
@@ -37,12 +47,16 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   _buildButton(
                     icon: Icons.remove,
-                    onTap: () {},
+                    onTap: () {
+                      context.read<CounterBloc>().add(DecrementEvent());
+                    },
                   ),
                   const SizedBox(width: 20),
                   _buildButton(
                     icon: Icons.add,
-                    onTap: () {},
+                    onTap: () {
+                      context.read<CounterBloc>().add(IncrementEvent());
+                    },
                   ),
                 ],
               ),
