@@ -29,9 +29,9 @@ class HomeScreen extends StatelessWidget {
             children: [
               BlocConsumer<CounterBloc, CounterState>(
           listener: (context, state) {
-            if (state.counter == 5) {
+            if (state.counter == 10) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Reached at 5')),
+                SnackBar(content: Text('Reached at 10')),
               );
             }
           },
