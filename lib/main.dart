@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => CounterBloc(),
       child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'bloc counter',
 
           home: HomeScreen()
       ),
